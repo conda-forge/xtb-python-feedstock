@@ -10,7 +10,7 @@ source:
   sha256: fc0cfad603324c4a41c575c7c3bf671bf68f03b1b9f0e40e8dc501a56b1b9b1e
 
 build:
-  number: 0
+  number: 1
   skip: True  # [win or osx]
 
 requirements:
@@ -36,10 +36,11 @@ test:
     - xtb
   requires:
     - pytest
-    - ase
+    - ase  # [python_impl == 'cpython']
     - qcelemental
   commands:
-    - pytest --pyargs xtb -vv
+    - pytest --pyargs xtb -vv  # [python_impl == 'cpython']
+    - pytest --ignore=xtb/ase --pyargs xtb -vv  # [python_impl == 'pypy']
 
 about:
   home: https://www.chemie.uni-bonn.de/pctc/mulliken-center/software/xtb
