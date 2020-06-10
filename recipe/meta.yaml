@@ -36,10 +36,11 @@ test:
     - xtb
   requires:
     - pytest
-    - ase
+    - ase  # [python_impl == 'cpython']
     - qcelemental
   commands:
-    - pytest --pyargs xtb -vv
+    - pytest --pyargs xtb -vv  # [python_impl == 'cpython']
+    - pytest --ignore=xtb/ase --pyargs xtb -vv  # [python_impl == 'pypy']
 
 about:
   home: https://www.chemie.uni-bonn.de/pctc/mulliken-center/software/xtb
