@@ -16,10 +16,11 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    - meson >=0.51
+    - meson 0.53.*
     - ninja
     - python
     - cffi
+    - pkg-config
   host:
     - python
     - pip
