@@ -1,5 +1,5 @@
 {% set name = "xtb-python" %}
-{% set version = "20.1" %}
+{% set version = "20.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://github.com/grimme-lab/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: fc0cfad603324c4a41c575c7c3bf671bf68f03b1b9f0e40e8dc501a56b1b9b1e
+  sha256: 37d0f6239c3fa536caeb3638a2ffb4f4070cb3cc2ca314be4504905f96c4aaf1
 
 build:
-  number: 1
-  skip: True  # [win or osx]
+  number: 0
+  skip: True  # [win]
 
 requirements:
   build:
