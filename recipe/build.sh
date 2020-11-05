@@ -4,7 +4,8 @@ set -ex
 meson_options=(
    "--prefix=${PWD}"
    "--libdir=xtb"
-   "--buildtype=release"
+   "--buildtype=debugoptimized"
+   "--optimization=2"
    "--warnlevel=0"
    "--default-library=shared"
    "-Dla_backend=netlib"
