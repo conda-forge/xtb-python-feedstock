@@ -24,7 +24,7 @@ requirements:
   host:
     - python
     - pip
-    - xtb
+    - xtb =6.3.3
   run:
     - python
     - cffi
