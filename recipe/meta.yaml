@@ -8,6 +8,8 @@ package:
 source:
   url: https://github.com/grimme-lab/{{ name }}/archive/v{{ version }}.tar.gz
   sha256: 37d0f6239c3fa536caeb3638a2ffb4f4070cb3cc2ca314be4504905f96c4aaf1
+  patches:
+    - xtb.patch
 
 build:
   number: 4
