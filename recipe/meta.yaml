@@ -39,6 +39,7 @@ test:
     - pytest
     - ase
     - qcelemental
+    - setuptools
   commands:  # [not (python_impl == 'pypy' and py<37)]
     - pytest --pyargs xtb -vv  # [not (python_impl == 'pypy' and py<37)]
 
