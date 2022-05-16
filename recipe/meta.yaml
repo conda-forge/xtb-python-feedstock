@@ -12,7 +12,7 @@ source:
     - xtb.patch
 
 build:
-  number: 4
+  number: 5
   skip: True  # [win or (osx and (python_impl == 'cpython' and py<38))]
 
 requirements:
@@ -31,7 +31,6 @@ requirements:
     - python
     - cffi
     - {{ pin_compatible('numpy') }}
-    - {{ pin_compatible('xtb', max_pin='x.x') }}
 
 
 test:
