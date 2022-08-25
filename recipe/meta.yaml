@@ -12,7 +12,7 @@ source:
     - xtb.patch
 
 build:
-  number: 5
+  number: 6
   skip: True  # [win or (osx and (python_impl == 'cpython' and py<38))]
 
 requirements:
