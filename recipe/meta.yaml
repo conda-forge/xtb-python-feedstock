@@ -1,36 +1,37 @@
 {% set name = "xtb-python" %}
-{% set version = "20.2" %}
+{% set version = "22.1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/grimme-lab/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 37d0f6239c3fa536caeb3638a2ffb4f4070cb3cc2ca314be4504905f96c4aaf1
-  patches:
-    - xtb.patch
+  url: https://github.com/grimme-lab/xtb-python/releases/download/v{{ version }}/xtb-{{ version }}.tar.gz
+  sha256: 7a59e7b783fc6e8b7328f55211de681e535a83991b07c4bab73494063f5e9018
 
 build:
-  number: 5
-  skip: True  # [win or (osx and (python_impl == 'cpython' and py<38))]
+  number: 0
+  skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - meson 0.53.*
-    - ninja
-    - python
-    - cffi
-    - pkg-config
+    - cffi                                # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+    - meson-python                        # [build_platform != target_platform]
+    - pkg-config                          # [build_platform != target_platform]
+    - python                              # [build_platform != target_platform]
   host:
-    - python
+    - cffi
+    - meson-python
+    - pkg-config
     - pip
+    - python
     - xtb
   run:
-    - python
     - cffi
-    - {{ pin_compatible('numpy') }}
+    - numpy
+    - python
 
 
 test:
@@ -40,9 +41,9 @@ test:
     - pytest
     - ase
     - qcelemental
-    - setuptools
-  commands:  # [not (python_impl == 'pypy' and py<37)]
-    - pytest --pyargs xtb -vv  # [not (python_impl == 'pypy' and py<37)]
+    - setuptools  # needs pkg_resources
+  commands:
+    - pytest --pyargs xtb -vv
 
 about:
   home: https://www.chemie.uni-bonn.de/pctc/mulliken-center/software/xtb
@@ -52,8 +53,8 @@ about:
     - "COPYING"
     - "COPYING.LESSER"
   summary: 'Python API of the Extended Tight-Binding Program Package'
-  doc_url: https://{{ name }}.readthedocs.io/
-  dev_url: https://github.com/grimme-lab/{{ name }}
+  doc_url: https://xtb-python.readthedocs.io/
+  dev_url: https://github.com/grimme-lab/xtb-python
 
 extra:
   recipe-maintainers:
