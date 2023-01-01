@@ -1,23 +1,15 @@
 #!/usr/bin/env bash
+
 set -ex
 
-meson_options=(
-   "--prefix=${PWD}"
-   "--libdir=xtb"
-   "--buildtype=debugoptimized"
-   "--optimization=2"
-   "--warnlevel=0"
-   "--default-library=shared"
-   "-Dla_backend=netlib"
-   ".."
-)
-
-mkdir -p _build
-pushd _build
-
-meson "${meson_options[@]}"
-
-ninja install
-popd
-
-"$PYTHON" -m pip install . --no-deps -vvv
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" != "1" ]]; then
+  "${PYTHON}" -m pip install . -v --no-deps
+else
+  cat >> pkgconfig.ini <<EOF
+[binaries]
+pkgconfig = '$BUILD_PREFIX/bin/pkg-config'
+EOF
+  meson setup _build ${MESON_ARGS} --cross-file pkgconfig.ini
+  meson compile -C _build
+  meson install -C _build --no-rebuild
+fi
