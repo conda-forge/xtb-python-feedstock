@@ -1,0 +1,25 @@
+From b3d756b4cc330f8718c7fe7b46145893662951b3 Mon Sep 17 00:00:00 2001
+From: Howard Pritchard <howardp@lanl.gov>
+Date: Thu, 6 Jun 2024 12:37:03 -0400
+Subject: [PATCH] xtb-python: patch meson build file
+
+At least with meson 1.3.2 one has to set pure to false
+for find installation or else build fails.
+
+Signed-off-by: Howard Pritchard <howardp@lanl.gov>
+---
+ meson.build | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/meson.build b/meson.build
+index 11703c8..83cc604 100644
+--- a/meson.build
++++ b/meson.build
+@@ -46,6 +46,7 @@ python = pymod.find_installation(
+   modules: [
+     'cffi',
+   ],
++  pure: false,
+ )
+ python_dep = python.dependency(required: true)
+ 
