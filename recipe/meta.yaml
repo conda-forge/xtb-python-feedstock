@@ -52,7 +52,7 @@ test:
     - qcelemental
     - setuptools  # needs pkg_resources
   commands:
-    - pytest --pyargs xtb.test_interface -vv
+    - pytest --pyargs xtb.test_interface -vv  # [build_platform != target_platform]
 
 about:
   home: https://www.chemie.uni-bonn.de/pctc/mulliken-center/software/xtb
